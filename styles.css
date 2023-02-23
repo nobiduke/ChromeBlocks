@@ -22,17 +22,19 @@
     background-color: #3322CC;
 }
 .score{
-    position: absolute;
-    left:48%;
-    top:25%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: 30vh;
     font-family:Arial;
     font-size:10vh;
     font-weight:900;
 }
 .highscore{
-    position:absolute;
-    left:45%;
-    top:5%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:0.5vh;
     font-family:Arial;
     font-size:3vh;
     font-weight:450;
