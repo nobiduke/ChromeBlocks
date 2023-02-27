@@ -9,6 +9,7 @@ var score = 0;
 var currVelocity = 1;
 var running = true;
 var highScore = 0;
+var currSpeed = 1;
 
 // var enemy = document.getElementById('enemy');
 
@@ -32,17 +33,17 @@ var playerAttrs = {
 
 document.addEventListener('keydown', (e) => {
     if (e.key == "a" || e.key == "ArrowLeft"){
-        playerAttrs.v.x += -1;
+        playerAttrs.v.x = -1;
     }
     else if (e.key == "d" || e.key == "ArrowRight"){
-        playerAttrs.v.x += 1;
+        playerAttrs.v.x = 1;
     }
     
     if (e.key == "w" || e.key == "ArrowUp"){
-        playerAttrs.v.y += 1;
+        playerAttrs.v.y = 1;
     
     } else if (e.key == "s" || e.key == "ArrowDown"){
-        playerAttrs.v.y += -1;
+        playerAttrs.v.y = -1;
     }
     
     if (e.key == " "){
@@ -101,6 +102,7 @@ function restart(){
     }
     score = 0;
     currVelocity = 1;
+    currSpeed = 1;
     
     Enemies = [];
 
@@ -143,14 +145,23 @@ function looping(){
     
     if(frameCount % 180 == 0){
         createEnemy();
+        if(currVelocity <= 5){
+            currVelocity+=0.25;
+    
+        }
+    }
+    if(frameCount % 360 == 0){
         frameCount = 0;
-        currVelocity+=0.5;
+        if(currSpeed <= 5){
+            currSpeed += 0.5;
+        
+        }
     }
     
-    playerAttrs.x += playerAttrs.v.x;
-    playerAttrs.y += playerAttrs.v.y;
-    playerAttrs.v.x += playerAttrs.a.x;
-    playerAttrs.v.y += playerAttrs.a.y;
+    playerAttrs.x += playerAttrs.v.x*currSpeed;
+    playerAttrs.y += playerAttrs.v.y*currSpeed;
+    //playerAttrs.v.x += playerAttrs.a.x;
+    //playerAttrs.v.y += playerAttrs.a.y;
     
     player.style.left = `${playerAttrs.x}px`;
     player.style.top = `${-playerAttrs.y}px`;
@@ -187,7 +198,4 @@ function looping(){
 
 
 window.requestAnimationFrame(looping);
-
-
-
 
